@@ -54,51 +54,7 @@ const handleLogin = async (req, res) => {
     }
 }
 
-// const handleLogin = async (req, res) => {
-//     // try {
-//         const { username, password } = req.body;
 
-//         if (!username || !password) {
-//             return res.status(400).send({ 'message': 'Username and password are required.' });
-//         }
-
-//         const [rows] = await pool.query(`SELECT password,username FROM users_info WHERE username = ? `, [username]);
-
-//         const username_query = rows[0].username;
-//         const passwordHash = rows[0].password;
-//         const match = await bcrypt.compare(password, passwordHash);
-
-//         if (match) {
-//             // create JWTs
-//             const accessToken = jwt.sign(
-//                 { "username": username_query },
-//                 process.env.ACCESS_TOKEN_SECRET,
-//                 { expiresIn: '1hr' }
-//             );
-
-//             const refreshToken = jwt.sign(
-//                 { "username": username_query },
-//                 process.env.REFRESH_TOKEN_SECRET,
-//                 { expiresIn: '1d' }
-//             );
-
-//             // to do 
-//             // Saving refreshToken with current user
-//             // inserting into database refresh token 
-//             // check if user is already in database else insert into database 
-
-//             inserttokens(username_query, passwordHash, refreshToken);
-//             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-//             res.json({ accessToken });
-//         } 
-//         else 
-//         {
-//             res.status(401).send({ error:'Invalid username or password' });
-//         }
-//     // } catch (error) {
-//     //     res.status(400).send({ error: error.message });
-//     // }
-// };
 
 
 module.exports = { handleLogin };
